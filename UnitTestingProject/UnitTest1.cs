@@ -6,12 +6,17 @@ namespace UnitTestingProject
     public class Tests
     {
         /// <summary>
+        /// For this test I am using the classes Player and Tilemap.
+        /// To check the player position, I will use the variables: tilemap_posX and tilemap_posY
+        /// To generate a tilemap, I will use the variable mString. And then the method GenerateATestMap and ConvertToMap
+        /// In player I will be using the methods: Move(int x, int y) and checkingForCollision(Tilemap _tilemap, char _char, Actor _actor, int x, int y) 
+        /// 
         /// A player is created in a position of (3, 3). At the sametime, a map is created where the player can move. The map contains wall in its border 
         /// which the player cannot cross. In addition, there's two specific blocks in the position (4,5) and (5,5), the player should not be able to cross or be
         /// in the same position than these two blocks.
         /// </summary>
 
-      
+
 
         public Player myPlayer = new Player(10, 1, 3, 3, 3, 3);
 
@@ -64,6 +69,7 @@ namespace UnitTestingProject
             ///</summary>
             ///<param>
             ///The tilemap is going to be consider, this is where the information of map is contained. 
+            /// For the collision, the infomation needed are: A tilemap, a char, an actor (player), int x and int y. 
             ///</param>
             ///<returns>
             ///1) True. The player will try to move 1 position up, the map does not contain any block nor wall in that position so the player should be able to go there
@@ -183,13 +189,14 @@ namespace UnitTestingProject
             /// the player will remain in the position (4,4)
             /// </summary>
             /// <returns>
-            ///  True, because the player couldn't move 1 position to the right because of the block, so the position in x shouldn't be 5
+            /// 1) True, is colliding with a Block.
+            /// 2) True, because the player couldn't move 1 position to the right because of the block, so the position in x shouldn't be 5
             /// 
             /// </returns>
 
+            bool collidingWithBlock = myPlayer.checkingForCollision(tileMap, '$', myPlayer, 1, 0);  //Its true if the player collides with the block after trying to move right
 
-
-
+            Assert.isTrue(collidingWithBlock);
 
 
             if (myPlayer.checkingForCollision(tileMap, '#', myPlayer, 1, 0) || myPlayer.checkingForCollision(tileMap, '$', myPlayer, 1, 0))
